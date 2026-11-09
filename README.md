@@ -1,1 +1,1 @@
-# Mini-project-1
+# Mini Project 1 - Student Marks Analysis System
