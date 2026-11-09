@@ -5,12 +5,12 @@ void readMarks(int marks[], int n)
 {
     for (int i = 0; i < n; i++)
     {
-        cout << "Enter marks for student " << i + 1 << ": ";
+        cout << "Enter mark of student " << i + 1 << ": ";
         cin >> marks[i];
 
         while (marks[i] < 0 || marks[i] > 100)
         {
-            cout << "Invalid! Enter between 0 and 100: ";
+            cout << "Invalid mark! Enter again: ";
             cin >> marks[i];
         }
     }
@@ -19,10 +19,12 @@ void readMarks(int marks[], int n)
 int findTotal(int marks[], int n)
 {
     int total = 0;
+
     for (int i = 0; i < n; i++)
     {
-        total += marks[i];
+        total = total + marks[i];
     }
+
     return total;
 }
 
@@ -34,61 +36,68 @@ double findAverage(int marks[], int n)
 
 int findHighest(int marks[], int n)
 {
-    int max = marks[0];
+    int highest = marks[0];
+
     for (int i = 1; i < n; i++)
     {
-        if (marks[i] > max)
+        if (marks[i] > highest)
         {
-            max = marks[i];
+            highest = marks[i];
         }
     }
-    return max;
+
+    return highest;
 }
 
 int findLowest(int marks[], int n)
 {
-    int min = marks[0];
+    int lowest = marks[0];
+
     for (int i = 1; i < n; i++)
     {
-        if (marks[i] < min)
+        if (marks[i] < lowest)
         {
-            min = marks[i];
+            lowest = marks[i];
         }
     }
-    return min;
+
+    return lowest;
 }
 
 int countPassed(int marks[], int n)
 {
-    int pass = 0;
+    int passed = 0;
+
     for (int i = 0; i < n; i++)
     {
         if (marks[i] >= 40)
         {
-            pass++;
+            passed++;
         }
     }
-    return pass;
+
+    return passed;
 }
 
 void printReport(int marks[], int n)
 {
+    int total = findTotal(marks, n);
     int passed = countPassed(marks, n);
-    int failed = n - passed;
 
-    cout << "\n--- Marks Report ---\n";
-    cout << "Total Marks    : " << findTotal(marks, n) << endl;
-    cout << "Average Marks  : " << findAverage(marks, n) << endl;
-    cout << "Highest Mark   : " << findHighest(marks, n) << endl;
-    cout << "Lowest Mark    : " << findLowest(marks, n) << endl;
-    cout << "Students Passed: " << passed << endl;
-    cout << "Students Failed: " << failed << endl;
+    cout << "\n===== STUDENT MARKS REPORT =====\n";
+
+    cout << "Total Marks: " << total << endl;
+    cout << "Average: " << findAverage(marks, n) << endl;
+    cout << "Highest Mark: " << findHighest(marks, n) << endl;
+    cout << "Lowest Mark: " << findLowest(marks, n) << endl;
+    cout << "Passed Students: " << passed << endl;
+    cout << "Failed Students: " << n - passed << endl;
 }
 
 int main()
 {
     int n;
-    char ch;
+    char choice;
 
     do
     {
@@ -97,7 +106,7 @@ int main()
 
         while (n < 1 || n > 100)
         {
-            cout << "Invalid count! Enter between 1 and 100: ";
+            cout << "Invalid count! Enter again: ";
             cin >> n;
         }
 
@@ -108,10 +117,12 @@ int main()
 
         delete[] marks;
 
-        cout << "\nRun again? (y/n): ";
-        cin >> ch;
+        cout << "\nDo you want to analyse again? (y/n): ";
+        cin >> choice;
 
-    } while (ch == 'y' || ch == 'Y');
+    } while (choice == 'y' || choice == 'Y');
+
+    cout << "\nThank you!\n";
 
     return 0;
 }
